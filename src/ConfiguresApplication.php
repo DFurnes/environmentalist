@@ -60,6 +60,19 @@ trait ConfiguresApplication
     }
 
     /**
+     * Write some instruction text.
+     *
+     * @param $description
+     */
+    public function instruction($description)
+    {
+        // @TODO: Handle indentation in "section" method...
+        $text = ' ' . $description;
+
+        $this->output->writeln($text);
+    }
+
+    /**
      * Choose an environment variable from a list.
      *
      * @param $key
