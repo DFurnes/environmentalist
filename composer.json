@@ -1,0 +1,16 @@
+{
+  "name": "dfurnes/environmentalist",
+  "description": "Dead-simple setup for Laravel apps.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "David Furnes",
+      "email": "david@dfurnes.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DFurnes\\Environmentalist\\": "src/"
+    }
+  }
+}
