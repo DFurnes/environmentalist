@@ -4,6 +4,11 @@ namespace DFurnes\Environmentalist;
 
 use Closure;
 use Dotenv\Dotenv;
+use Dotenv\Environment\DotenvFactory;
+use Dotenv\Exception\InvalidFileException;
+use Dotenv\Environment\Adapter\PutenvAdapter;
+use Dotenv\Environment\Adapter\EnvConstAdapter;
+use Dotenv\Environment\Adapter\ServerConstAdapter;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 
 /** @mixin \Illuminate\Console\Command */
@@ -137,7 +142,10 @@ trait ConfiguresApplication
     protected function reloadEnvironment()
     {
         // Reload the environment variables from the file.
-        (new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
+        $factory = new DotenvFactory([new EnvConstAdapter, new ServerConstAdapter, new PutenvAdapter]);
+        Dotenv::create($app->environmentPath(), $app->environmentFile(), $factory)->load();
+
+        $env->load();
 
         // Reload the config repository.
         $loader = new LoadConfiguration;
