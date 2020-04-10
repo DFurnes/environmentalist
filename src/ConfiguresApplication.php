@@ -143,9 +143,7 @@ trait ConfiguresApplication
     {
         // Reload the environment variables from the file.
         $factory = new DotenvFactory([new EnvConstAdapter, new ServerConstAdapter, new PutenvAdapter]);
-        Dotenv::create($app->environmentPath(), $app->environmentFile(), $factory)->load();
-
-        $env->load();
+        Dotenv::create(app()->environmentPath(), app()->environmentFile(), $factory)->load();
 
         // Reload the config repository.
         $loader = new LoadConfiguration;
