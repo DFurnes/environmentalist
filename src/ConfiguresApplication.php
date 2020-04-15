@@ -35,12 +35,12 @@ trait ConfiguresApplication
     }
 
     /**
-     * Run an Artisan command.
+     * Run an Artisan command with some custom logging.
      *
      * @param $command
      * @param $description
      */
-    protected function runCommand($command, $description) {
+    protected function runArtisanCommand($command, $description) {
         $call = $this->output->isVerbose() ? 'call' : 'callSilent';
         $write = $this->output->isVerbose() ? 'writeln' : 'write';
 
