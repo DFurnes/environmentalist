@@ -5,11 +5,12 @@ namespace DFurnes\Environmentalist;
 use Closure;
 use Dotenv\Dotenv;
 use Dotenv\Environment\DotenvFactory;
-use Dotenv\Exception\InvalidFileException;
 use Dotenv\Environment\Adapter\PutenvAdapter;
 use Dotenv\Environment\Adapter\EnvConstAdapter;
 use Dotenv\Environment\Adapter\ServerConstAdapter;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Symfony\Component\Console\Output\NullOutput;
 
 /** @mixin \Illuminate\Console\Command */
 trait ConfiguresApplication
@@ -37,15 +38,19 @@ trait ConfiguresApplication
     /**
      * Run an Artisan command with some custom logging.
      *
-     * @param $command
+     * @param $signature
      * @param $description
      */
-    protected function runArtisanCommand($command, $description) {
-        $call = $this->output->isVerbose() ? 'call' : 'callSilent';
+    public function runArtisanCommand($signature, $description)
+    {
         $write = $this->output->isVerbose() ? 'writeln' : 'write';
 
         $this->output->{$write}('<comment>' . $description . '...</comment> ');
-        $this->{$call}($command);
+
+        $output = $this->output->isVerbose() ? $this->output : new NullOutput();
+
+        Artisan::call($signature, [], $output);
+
         $this->output->{$write}('Done!');
 
         $this->line('');
