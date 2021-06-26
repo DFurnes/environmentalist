@@ -8,7 +8,6 @@ use Dotenv\Repository\Adapter\EnvConstAdapter;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
-use Dotenv\Repository\RepositoryInterface;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Symfony\Component\Console\Output\NullOutput;
