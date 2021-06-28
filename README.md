@@ -14,7 +14,7 @@ $ composer require dfurnes/environmentalist
 
 Environmentalist is essentially a [PHP trait](https://www.php.net/manual/en/language.oop5.traits.php) that provides a collection of helpful methods that you can use within your console commands for setting up a project.
 
-To being using it, you need to create a console command in your Laravel project. As an exmaple, let's create a new `SetupCommand` for our project:
+To begin using it, you need to create a console command in your Laravel project. As an exmaple, let's create a new `SetupCommand` for our project:
 
 ```shell
 $ php artisan make:command SetupCommand
