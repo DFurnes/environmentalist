@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "laravel/framework": "^7.0",
+    "laravel/framework": "^8.0",
     "vlucas/phpdotenv": "^4.0"
   },
   "autoload": {
