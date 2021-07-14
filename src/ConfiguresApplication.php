@@ -4,10 +4,7 @@ namespace DFurnes\Environmentalist;
 
 use Closure;
 use Dotenv\Dotenv;
-use Dotenv\Repository\Adapter\EnvConstAdapter;
-use Dotenv\Repository\Adapter\PutenvAdapter;
-use Dotenv\Repository\Adapter\ServerConstAdapter;
-use Dotenv\Repository\RepositoryBuilder;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Symfony\Component\Console\Output\NullOutput;
@@ -151,16 +148,7 @@ trait ConfiguresApplication
      */
     protected function reloadEnvironment()
     {
-        $adapters = [
-            new EnvConstAdapter(),
-            new PutenvAdapter(),
-            new ServerConstAdapter(),
-        ];
-
-        $repository = RepositoryBuilder::create()
-            ->withReaders($adapters)
-            ->withWriters($adapters)
-            ->make();
+        $repository = Env::getRepository();
 
         // Reload the environment variables from the file.
         Dotenv::create($repository, app()->environmentPath(), null)->load();
